@@ -8,7 +8,7 @@ export const getAllTodo = createSelector(
   selectAll
 );
 
-export const areCoursesLoaded = createSelector(
+export const areTodosLoaded = createSelector(
   todoFeatureSelector,
   state => state.todoLoaded
 );

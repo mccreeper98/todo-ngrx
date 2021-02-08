@@ -1,0 +1,21 @@
+<div class="content">
+
+  <h1>Create To Do</h1>
+
+  <div class="add">
+    <form (ngSubmit)="onSubmit(createForm)" #createForm="ngForm">
+      <div class="form-group">
+        <input
+        placeholder="New To Do ..."
+          type="text"
+          id="newTodo"
+          name="newTodo"
+          class="form-control"
+          [(ngModel)]="buffer"
+          required
+          style="width: 500px"/>
+      </div>
+      <button [disabled]="createForm.invalid" class="addBtn" type="submit">Add</button>
+    </form>
+  </div>
+</div>

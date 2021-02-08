@@ -1,0 +1,6 @@
+<div class="app-Panel app-Panel--Primary hpan header-content">
+  <button class="app-Button app-Button--IconDark menuBtn" (click)="openMenu()">menu</button>
+  <div class="app-Label app-Label--Title">To Do App</div>
+</div>
+
+<app-menu (close)="closeMenu()" *ngIf="menuOpened"></app-menu>

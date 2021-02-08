@@ -3,17 +3,19 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const path = require("path");
 
-app.use(bodyparser.json({
-  limit: 1024 * 124 * 50, //50Mb
-  type: "application/json"
-}));
+//parse application/x-www-form-urlencoded
+app.use(bodyparser.urlencoded({extended: false}));
 
-if(process.env.ENV === "local"){
-  const cors = require("cors");
-  app.use(cors({
-    origin: "http://localhost:4200"
-  }));
-}
+//parse application/json
+app.use(bodyparser.json());
+
+// add cross origin support
+app.use((_req, res, next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
 
 //enable server routes
 app.use(require("./routes/index"));
@@ -25,3 +27,10 @@ app.use(express.static(path.resolve(__dirname, "../dist/todo")));
 app.get("*", (_req, res) => {
   res.sendFile(path.resolve(__dirname, "../dist/todo/index.html"));
 });
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.info("Listening on port: " + port);
+});
+
+module.exports = app;

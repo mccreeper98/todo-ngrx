@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoPanelComponent } from './todo-panel.component';
+import { MenuComponent } from './menu.component';
 
-describe('TodoPanelComponent', () => {
-  let component: TodoPanelComponent;
-  let fixture: ComponentFixture<TodoPanelComponent>;
+describe('MenuComponent', () => {
+  let component: MenuComponent;
+  let fixture: ComponentFixture<MenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TodoPanelComponent ]
+      declarations: [ MenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TodoPanelComponent);
+    fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

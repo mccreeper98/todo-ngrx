@@ -7,6 +7,7 @@ import { todoActionTypes } from '../store/todo.actions';
 import { getAllTodo } from '../store/todo.selectors';
 import { Todo } from '../todo.model';
 import * as uuid from 'uuid';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-panel',
@@ -21,6 +22,7 @@ export class TodoPanelComponent implements OnInit {
   buffer: string = "";
 
   constructor(
+    private todoService: TodoService,
     private store: Store<AppState>
   ) {
     this.todos$ = of([]);
@@ -35,14 +37,14 @@ export class TodoPanelComponent implements OnInit {
   }
 
   check(todo: Todo){
-    const checkling = {
-      check: !todo.check
+    const checking = {
+      finish: todo.finish === 'true' ? 'flase' : 'true'
     };
     const update: Update<Todo> = {
       id: todo.Id,
       changes: {
         ...todo,
-        ...checkling
+        ...checking
       }
     };
 
@@ -70,26 +72,10 @@ export class TodoPanelComponent implements OnInit {
     this.isUpdateActivated = false;
     this.todoToBeUpdate = {
       Id:'',
-      check: false,
+      finish: 'false',
       description: '',
-      user: ''
+      User_fk: ''
     }
-  }
-
-  onSubmit(submittedForm: any){
-    if(submittedForm.invalid){
-      return;
-    }
-    const todo: Todo = {
-      Id: uuid.v4(),
-      check: false,
-      description: submittedForm.value.newTodo,
-      user: ''
-    };
-
-    this.store.dispatch(todoActionTypes.createTodo({todo}));
-
-    this.buffer = "";
   }
 
 }

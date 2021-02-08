@@ -7,7 +7,9 @@ export interface TodoState extends EntityState<Todo>{
   todoLoaded: boolean;
 }
 
-export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
+export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>({
+  selectId: Todo => Todo.Id
+});
 
 export const initialState = adapter.getInitialState({
   todoLoaded: false

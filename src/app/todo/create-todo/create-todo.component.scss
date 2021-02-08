@@ -1,0 +1,49 @@
+.content{
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.add {
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.add:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  margin: 0;
+  border: none;
+  border-bottom: #555 1px solid;
+  border-radius: 0;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  border: 0;
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}

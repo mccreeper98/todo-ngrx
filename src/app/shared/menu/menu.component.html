@@ -1,0 +1,23 @@
+<div class="content app-Panel app-Panel--Paper">
+
+  <div class="content-header app-Panel app-Panel--Primary">
+
+    <!-- <div class="userinfo">
+      <div class="app-Image app-Image--CircleLarge">
+        <img [src]="userpicture" alt="user_image">
+      </div>
+      <div class="app-Label app-Label--Title">{{ username }}</div>
+      <div class="app-Label">{{ useremail }}</div>
+    </div> -->
+    <button class="app-Button app-Button--IconDark" (click)="closeMenu()">close</button>
+
+  </div>
+
+  <div class="content-body app-Panel app-Panel--Paper">
+    <div class="app-Panel option hpan" *ngFor="let item of menuItems" (click)="navigateToPage(item.path)">
+      <div class="app-Label app-Label--Icon">{{item.icon}}</div>
+      <div class="app-Label option-name">{{item.label}}</div>
+    </div>
+  </div>
+
+</div>

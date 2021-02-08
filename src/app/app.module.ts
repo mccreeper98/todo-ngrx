@@ -9,20 +9,29 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment.prod';
 import { FormsModule } from '@angular/forms';
 import { TodoModule } from './todo/todo.module';
+import { HttpClientModule } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoResolver } from './todo/todo.resolver';
+import { HeaderComponent } from './shared/header/header.component';
+import { MenuComponent } from './shared/menu/menu.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     TodoModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [],
+  providers: [TodoResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

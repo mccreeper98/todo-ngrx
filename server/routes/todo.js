@@ -20,11 +20,7 @@ router.get('/', async(req, res) => {
 
   const total = await dbconn.execute(totalStatement);
   const hasMore = (offset + limit) < total[0].total;
-
-  res.status(200).send({
-    todos: listResult,
-    hasMoreitems: hasMore
-  });
+  res.status(200).send(listResult);
 
 });
 
@@ -39,6 +35,7 @@ router.post("/", async(req, res) => {
     });
   }
 
+  delete payload.Id
   const insertCols = [];
   const insertValues = [];
   for(let prop in payload){
@@ -48,8 +45,9 @@ router.post("/", async(req, res) => {
   }
 
   const insertStatement = `INSERT INTO ToDo(${insertCols.join(",")}) VALUES(${insertValues.join(",")})`;
+  console.log(insertStatement);
   const insertResult = await dbconn.execute(insertStatement).catch(error => {
-    console.log("Error inserting new todo: " + erro);
+    console.log("Error inserting new todo: " + error);
     appError = error;
   });
 
@@ -71,7 +69,15 @@ router.put("/:id", async(req, res) => {
     });
   }
 
-  const payload = req.body.todo;
+  const payload = req.body;
+
+  if(!payload){
+    return res.status(400).send({
+      message: "Invalid request",
+      details: "payload is required"
+    });
+  }
+
   const updatedValues = [];
   delete payload.Id;
   for(let prop in payload){
